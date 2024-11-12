@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DrawerComponent } from '../drawer/drawer.component';
-import { FeatureService } from '../feature.service';
 
 @Component({
   selector: 'app-feature-card',
@@ -13,9 +12,4 @@ import { FeatureService } from '../feature.service';
 })
 export class FeatureCardComponent {
 
-  constructor(private drawerService: FeatureService) {}
-
-  openDrawer() {
-    this.drawerService.openDrawer();
-  }
 }

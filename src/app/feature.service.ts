@@ -12,16 +12,6 @@ export class FeatureService {
   public userId: number = 0;
 
 
-   drawerOpenSubject = new Subject<void>();
-   drawerCloseSubject = new Subject<void>();
-
-  drawerOpen$ = this.drawerOpenSubject.asObservable();
-  drawerClose$ = this.drawerCloseSubject.asObservable();
-
-  
-
-  
-  
   constructor(private http: HttpClient) {
     // Retrieve userId from sessionStorage on service initialization
     // const storedUserId = sessionStorage.getItem('userId');
@@ -39,19 +29,6 @@ export class FeatureService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
-  openDrawer() {
-    console.log('Drawer opening triggered in feature.service');
-    this.drawerOpenSubject.next();
-    console.log("hello from service");
-  }
-
-  closeDrawer() {
-    document.getElementById('drawer')?.classList.remove('open');
-    document.getElementById('drawerOverlay')?.classList.remove('active');
-    console.log("closeDrawer function triggered in feature.service"); 
-    
-  }
-
   
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/AddUser/ValidateUser`, data, { headers: this.getHeaders() }).pipe(
@@ -65,5 +42,10 @@ export class FeatureService {
         }
       })
     );
+  }
+
+
+  addUser(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/AddUser`, data, { headers: this.getHeaders() });
   }
 }

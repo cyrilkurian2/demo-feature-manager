@@ -1,36 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FeatureService } from '../feature.service';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu'
 
 
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [MatSidenavModule, MatCheckboxModule, FormsModule, MatButtonModule,MatMenuModule],
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.scss'
 })
-export class DrawerComponent implements OnInit{
-  isOpen = false;
-
-  constructor(public drawerService: FeatureService) {}
-
-  ngOnInit(): void {
-    this.drawerService.drawerOpen$.subscribe(() => {
-      this.isOpen = true;
-    });
-
-    this.drawerService.drawerClose$.subscribe(() => {
-      this.isOpen = false;
-    });
-  }
-
-  toggleDrawer() {
-    if (this.isOpen) {
-      this.drawerService.closeDrawer();
-    } else {
-      this.drawerService.openDrawer();
-    }
-  }
+export class DrawerComponent{
   
+  events: string[] = [];
+  opened: boolean | undefined;
 }
